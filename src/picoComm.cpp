@@ -14,17 +14,7 @@
 
 void * picoComm::pObject;
 
-
-int tempStore[2*100000];
-
-float constrainF(float v, float low, float high) {
-    return (v < low) ? low : ( (v > high) ? high : v );
-}
-
-int constrain(int v, int low, int high) {
-    return (v < low) ? low : ( (v > high) ? high : v );
-}
-
+/*
 char picoOutput2Char(int v) {
 	if(v < -32767) {
 		printf("buffer overrun in fast streaming mode \n");
@@ -37,6 +27,7 @@ char picoOutput2Char(int v) {
 		return cv;
 	}
 }
+*/
 
 picoComm::picoComm() {
 	
@@ -49,7 +40,7 @@ void picoComm::setup(int x, int y) {
 	this->x = x;
 	this->y = y;
 
-	sampleRate = 10000;
+	sampleRate = 500000;
 
 	_fr = 0;
 	_secondCount = 0;
@@ -61,11 +52,11 @@ void picoComm::setup(int x, int y) {
 
 	//buttons
 	guiButton* b_open = new guiButton();
-	b_open->setup(x,y+50,80,17,"open scope", "close scope");
+	b_open->setup(x,y+10,80,17,"open scope", "close scope");
 	buttons.push_back(*b_open);
 
 	guiButton* b_stream = new guiButton();
-	b_stream->setup(x+85,y+50,90,17,"start stream", "stop stream");
+	b_stream->setup(x+85,y+10,90,17,"start stream", "stop stream");
 	b_stream->_on = false;
 	buttons.push_back(*b_stream);
 }
@@ -175,15 +166,11 @@ void picoComm::draw(ofTrueTypeFont * font) {
 	font->drawString("PICOSCOPE", 0,0);
 
 	char prstr[100]; 
-	if(_open && _streaming) sprintf(prstr, "opened / streaming");
-	else if(_open) sprintf(prstr, "opened");
-	else sprintf(prstr, " ");
-	font->drawString(prstr,0,10);
 
-	sprintf(prstr, "%03i fps", _fr);
-	font->drawString(prstr, 0,25);
-	sprintf(prstr, "%i Hz",_inputSampleRate);
-	font->drawString(prstr, 80,25);
+	sprintf(prstr, "/ %03i fps", _fr);
+	font->drawString(prstr, 80,0);
+	sprintf(prstr, "/ %i Hz",_inputSampleRate);
+	font->drawString(prstr, 140,0);
 
 	ofPopMatrix();
 

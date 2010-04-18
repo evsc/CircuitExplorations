@@ -29,8 +29,12 @@ class testApp : public ofBaseApp{
 
 		Display display;
 
+		//vizDisplay viz;
+
 		void setExpectedData(int &v);
 		void storeDataArray(short**& overviewBuffers);
+		void toggleDisplayRun(bool &v);
 		int nValues;
+
 };
 

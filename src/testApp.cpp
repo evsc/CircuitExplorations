@@ -8,18 +8,21 @@ void testApp::setup(){
 	font.loadFont("verdana.ttf", 8);
 
 	pico.setup(50,50);
-	display.setup(50,150);
+	display.setup(50,130);
 	storage.setup();
-	
 
 	ofAddListener(pico.setExpectedData, this, &testApp::setExpectedData);
 	ofAddListener(pico.storeDataArray, this, &testApp::storeDataArray);
+
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
 	pico.checkMouse(mouseX,mouseY);
 	pico.update();
+	display.checkMouse(mouseX,mouseY);
+	display.update();
+	//printf("%f fps \n", ofGetFrameRate());
 }
 
 //--------------------------------------------------------------
@@ -44,7 +47,8 @@ void testApp::storeDataArray(short**& overviewBuffers) {
 	for(int i=0; i<nValues; i++) {
 		v1 = (*(*overviewBuffers+i));
 		v2 = (*(*overviewBuffers+BUFFER_SIZE*2+i));
-		storage.inputData(v1,v2);
+		//storage.inputData(v1,v2);
+		display.fileNewData(v1,v2);
 		//printf("%i\t", v1);
 		//printf("%i\t", v2);
 	}
@@ -84,10 +88,10 @@ void testApp::mousePressed(int x, int y, int button){
 //--------------------------------------------------------------
 void testApp::mouseReleased(int x, int y, int button){
 	pico.click();
+	display.click();
 }
 
 //--------------------------------------------------------------
 void testApp::windowResized(int w, int h){
 
 }
-
