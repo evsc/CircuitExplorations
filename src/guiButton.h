@@ -2,17 +2,16 @@
 
 #include "ofTrueTypeFont.h"
 
-
 class guiButton
 {
 public:
 	guiButton(void);
 	~guiButton(void);
 
-	int x;
-	int y;
-	int w;
-	int h;
+	float x;
+	float y;
+	float w;
+	float h;
 
 	char * name;
 	char * name_on;
@@ -22,7 +21,7 @@ public:
 	bool _activated;
 	bool _on;
 
-	void setup(int x, int y, int w, int h, char * on, char * off);
+	void setup(float x, float y, float w, float h, char * on, char * off);
 
 	void draw(ofTrueTypeFont * font);
 

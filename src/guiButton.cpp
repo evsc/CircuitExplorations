@@ -9,7 +9,7 @@ guiButton::~guiButton(void)
 {
 }
 
-void guiButton::setup(int x, int y, int w, int h, char *on, char *off) {
+void guiButton::setup(float x, float y, float w, float h, char *on, char *off) {
 	this->x = x;
 	this->y = y;
 	this->w = w;
